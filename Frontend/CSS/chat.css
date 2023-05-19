@@ -85,7 +85,7 @@ nav {
 /*todo <!----------------------------------------------- < Contacts > -----------------------------------------------> */
 .ContactContainer {
   width: 100%;
-  min-height: 8vh;
+  min-height: 75vh;
   padding: 7px;
   display: flex;
   justify-content: flex-start;
@@ -130,8 +130,10 @@ nav {
   padding: 4px 15px;
   border: none;
   border-radius: 5px;
+  margin-top: 5px;
 }
 .FollowFriend {
+  margin-top: 5px;
   background-color: white;
   color: #1c98f7;
   padding: 4px 15px;
@@ -200,7 +202,8 @@ nav {
   border-radius: 25px;
 }
 .MsgRight p {
-  background-color: rgb(233, 227, 227);
+  border: 1px solid #d2cece;
+  background-color: rgb(255, 255, 255);
 }
 .MsgLeft p {
   color: white;
