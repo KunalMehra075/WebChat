@@ -1,0 +1,58 @@
+#IndexHome {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../Images/chatapp.avif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  background-position: center;
+  background-color: rgb(238, 236, 236);
+}
+
+.Introbox {
+  background-color: white;
+  margin: auto;
+  width: 40%;
+  padding: 40px 80px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.Introbox input {
+  width: 100%;
+  padding: 7px 7px;
+  font-size: 18px;
+  margin: 2px 0px;
+}
+#GoogleSignup {
+  width: 100%;
+  background-color: white;
+  padding: 8px 4px;
+  border-radius: 2px;
+  font-size: 18px;
+  color: grey;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+#GoogleSignup:hover {
+  background-color: whitesmoke;
+}
+#SubmitButton {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #1c98f7;
+  padding: 8px 4px;
+  border-radius: 2px;
+  font-size: 20px;
+  color: white;
+  font-weight: 500;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+#SubmitButton:hover {
+  background-color: #1985d7;
+}

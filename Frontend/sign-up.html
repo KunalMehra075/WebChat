@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebChat Signin</title>
+    <link rel="stylesheet" href="CSS/common.css" />
+    <!-- <script src="JS/firebase.js" type="module" defer></script>
+    <script src="JS/common.js" type="module" defer></script> -->
+  </head>
+  <body>
+    <main>
+      <section id="Home">
+        <a href="index.html">Home</a>
+
+        <form id="signupform">
+          <input type="text" id="name" placeholder="Enter name" required />
+          <input type="number" id="age" placeholder="Enter age" required />
+          <input type="email" id="email" placeholder="Enter email" required />
+          <input
+            type="text"
+            id="password"
+            placeholder="Enter password"
+            required
+          />
+          <input type="submit" value="submit" />
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
+<!-- <script>
+  //   const HOST = "https://mock-10-chatapp.onrender.com";
+
+  async function SignupRequest(creds) {
+    try {
+      let res = await fetch(`${HOST}/users/signup`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(creds),
+      });
+      let data = await res.json();
+      console.log(data);
+      if (data.success == true) {
+        alert(data.Message);
+        setTimeout(() => {
+          window.location.href = "chat.html";
+        }, 1000);
+      } else {
+        alert(data.Message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+</script> -->

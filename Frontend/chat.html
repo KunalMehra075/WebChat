@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebChat</title>
+    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="CSS/chat.css" />
+    <script src="JS/common.js" defer></script>
+  </head>
+  <body>
+    <!--!--------------------------------------------- Header ----------------------------------------------->
+    <header>
+      <nav>
+        <div id="NavUser">
+          <div>
+            <img class="mainphoto" src="Images/mainimg.png" alt="" />
+          </div>
+          <div>
+            <h1 id="NavUserName">Kunal Mehra</h1>
+            <p id="NavUserEmail">kunalmehra240304@gmail.com</p>
+          </div>
+        </div>
+        <div>
+          <div class="flex" style="justify-content: center">
+            <h1 id="WelcomeHead">WebChat</h1>
+            <img width="50px" src="Images/chatlogo.png" alt="" />
+          </div>
+        </div>
+        <div class="MenuBox">
+          <div>
+            <img src="Images/belliconsvg.png" alt="Bell" />
+          </div>
+          <div>
+            <img src="Images/menuicon.png" alt="Menu" />
+          </div>
+          <div>
+            <img src="Images/settingspng.png" alt="Setting" />
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!--!--------------------------------------------- Main Body ----------------------------------------------->
+    <main>
+      <section id="Home">
+        <div id="ContactsBox">
+          <h1>Contacts & Groups</h1>
+          <div class="ContactContainer">
+            <div class="Contact">
+              <div>
+                <img class="contactImage" src="Images/chatlogo.png" alt="" />
+              </div>
+              <div>
+                <p class="contactName">Kunal Mehra</p>
+                <p class="contactEmail">Hi Hello there</p>
+              </div>
+            </div>
+            <div class="Contact">
+              <div>
+                <img class="contactImage" src="Images/chatlogo.png" alt="" />
+              </div>
+              <div>
+                <p class="contactName">Kunal Mehra</p>
+                <p class="contactEmail">Hello Kunal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="ChatBox">
+          <div class="ChatsContainer">
+            <div class="ChatTopNav">
+              <div>
+                <img src="Images/chatlogo.png" alt="" />
+                <div style="line-height: 1.2">
+                  <h1>Kunal Mehra</h1>
+                  <label>online</label>
+                </div>
+              </div>
+            </div>
+            <div class="MessagesContainer">
+              <div class="MsgRight MsgInstance">
+                <div>
+                  <img class="ChatSmolImgs" src="Images/chatlogo.png" alt="" />
+                  <p>Message 1</p>
+                </div>
+              </div>
+              <div class="MsgLeft MsgInstance">
+                <div>
+                  <img class="ChatSmolImgs" src="Images/chatlogo.png" alt="" />
+                  <p>Hello I am Kunal Mehra ahahahahah</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <form id="SendMessageForm">
+                <input type="text" placeholder="Enter Text" />
+                <input type="submit" value="Send" />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="SearchBox">
+          <h1>Search for a Friend</h1>
+          <input type="text" id="searchBar" placeholder="Enter Email" />
+          <div class="SearchCardContainer">
+            <div class="SearchCard">
+              <div>
+                <img class="contactImage" src="Images/chatlogo.png" alt="" />
+              </div>
+              <div>
+                <p class="contactName">Kunal Mehra</p>
+                <p class="contactEmail">kunalmehra240304@gmail.com</p>
+                <button class="AddFriend">Add Friend +</button>
+                <button class="FollowFriend">Follow +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!--!--------------------------------------------- Footer ----------------------------------------------->
+    <footer></footer>
+  </body>
+</html>

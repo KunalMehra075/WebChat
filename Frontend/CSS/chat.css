@@ -1,0 +1,225 @@
+nav {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.MenuBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 80px;
+}
+.MenuBox img {
+  width: 30px;
+}
+.MenuBox > div {
+  margin: 10px;
+}
+#NavUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainphoto {
+  width: 70px;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 2px solid #1c98f7;
+}
+#NavUserEmail {
+  color: #1c98f7;
+}
+
+#Home {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+#Home > div {
+  border-radius: 5px;
+  min-height: 80vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin: 4px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+#ContactsBox {
+  width: 29%;
+}
+
+/*todo <!----------------------------------------------- < Searchbox > -----------------------------------------------> */
+#SearchBox {
+  width: 29%;
+}
+
+#searchBar {
+  width: 95%;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  padding: 7px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.SearchCard {
+  width: 95%;
+  border-radius: 5px;
+  margin: 8px auto;
+  padding: 4px 7px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.SearchCardContainer {
+  width: 100%;
+}
+/*todo <!----------------------------------------------- < Contacts > -----------------------------------------------> */
+.ContactContainer {
+  width: 100%;
+  min-height: 8vh;
+  padding: 7px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.Contact {
+  border-radius: 2px;
+  margin: 0 auto;
+  padding: 4px 7px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.contactName {
+  font-size: 18px;
+  font-weight: 500;
+}
+.Contact > div:nth-child(1),
+.SearchCard > div:nth-child(1) {
+  width: 17%;
+}
+.Contact > div:nth-child(2),
+.SearchCard > div:nth-child(2) {
+  width: 70%;
+}
+.contactEmail {
+  font-size: 14px;
+  color: rgb(159, 156, 156);
+}
+.contactImage {
+  width: 60px;
+}
+.AddFriend {
+  background-color: #1c98f7;
+  color: white;
+  padding: 4px 15px;
+  border: none;
+  border-radius: 5px;
+}
+.FollowFriend {
+  background-color: white;
+  color: #1c98f7;
+  padding: 4px 15px;
+  border: 1px solid #1c98f7;
+  border-radius: 5px;
+}
+/*todo <!----------------------------------------------- < Chatbox > -----------------------------------------------> */
+
+#ChatBox {
+  width: 40%;
+  backdrop-filter: brigtness(5);
+  background: url(../Images/doodlebg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.ChatsContainer {
+  width: 100%;
+}
+.ChatTopNav {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1c98f7;
+  min-height: 70px;
+  margin-bottom: 5px;
+}
+.ChatTopNav > div {
+  color: white;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.ChatTopNav img {
+  width: 50px;
+  margin: 8px;
+  margin-right: 12px;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+.MessagesContainer {
+  height: 64vh;
+  overflow-y: scroll;
+}
+#SendMessageForm input {
+  width: 79%;
+  padding: 8px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+#SendMessageForm input[type="submit"] {
+  border-radius: 5px;
+  font-size: 18px;
+  width: 20%;
+  font-weight: 500;
+  background-color: #1c98f7;
+  color: white;
+  border: none;
+}
+.MsgInstance p {
+  max-width: 350px;
+  width: fit-content;
+  padding: 8px 15px;
+  border-radius: 25px;
+}
+.MsgRight p {
+  background-color: rgb(233, 227, 227);
+}
+.MsgLeft p {
+  color: white;
+  background-color: #1c98f7;
+}
+.MsgInstance > div {
+  display: flex;
+  margin: 4px 0;
+  align-items: center;
+}
+.MsgLeft > div {
+  justify-content: right;
+  flex-direction: row-reverse;
+}
+.MsgRight > div {
+  justify-content: left;
+}
+.ChatSmolImgs {
+  width: 40px;
+  margin: 0px 4px;
+  border-radius: 50%;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Chat App</title>
+    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="CSS/index.css" />
+    <script src="JS/firebase.js" type="module" defer></script>
+    <script src="JS/common.js" defer></script>
+  </head>
+
+  <body>
+    <!--!--------------------------------------------- Header ----------------------------------------------->
+    <header></header>
+    <!--!--------------------------------------------- Main Body ----------------------------------------------->
+    <main>
+      <section id="IndexHome">
+        <div class="Introbox">
+          <div class="flex" style="justify-content: center">
+            <h1 id="WelcomeHead">Welcome To WebChat</h1>
+            <img width="50px" src="Images/chatlogo.png" alt="" />
+          </div>
+          <form action="">
+            <label for="email">Email</label><br />
+            <input
+              type="text"
+              id="email"
+              placeholder="Enter Email"
+              required
+            /><br />
+            <label for="email">Password</label><br />
+            <input
+              type="text"
+              id="pass"
+              placeholder="Enter Password"
+              required
+            />
+            <br />
+            <input id="SubmitButton" type="submit" value="Login" />
+          </form>
+          <br />
+          <hr />
+          <br />
+          <p style="width: 100%; text-align: center; margin-bottom: 4px">OR</p>
+          <button id="GoogleSignup" class="flexCenter">
+            Signup With
+            <img
+              width="70px"
+              style="margin-left: 7px"
+              src="Images/googlepng.png"
+              alt=""
+            />
+          </button>
+        </div>
+      </section>
+    </main>
+    <!--!--------------------------------------------- Footer ----------------------------------------------->
+    <footer></footer>
+  </body>
+</html>
