@@ -3,11 +3,15 @@ import { auth, onAuthStateChanged, signOut, get, ref, Database, db, collection, 
 
 
 CheckUserSignedInOrNot()
+
 function CheckUserSignedInOrNot() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            const uid = user.uid;
             console.log(user);
+            let ActiveUser = user.displayName || user.email.split("@")[0].replace(/[0-9]/g, '');
+            let UserEmail = user.email
+            let UserID = user.uid
+            RenderUserDataOnPage(ActiveUser, UserEmail, UserID)
             GetAllUsers()
         } else {
             swal("No User Signed In", "Redirecting to Home Page", "info");
@@ -18,6 +22,11 @@ function CheckUserSignedInOrNot() {
     });
 }
 
+function RenderUserDataOnPage(name, email, id) {
+    NavUserName.innerHTML = name
+    NavUserEmail = email
+    localStorage.setItem("UserID", uid)
+}
 
 
 async function GetAllUsers() {
@@ -34,7 +43,18 @@ async function GetAllUsers() {
 }
 
 
+let SendMessageForm = document.getElementById("SendMessageForm")
+let msg = document.getElementById("msgInp")
+SendMessageForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    let message = {
+        senderID: "",
+        recieverID: "",
+        text: msg.value
+    }
+    console.log(message);
 
+})
 
 
 

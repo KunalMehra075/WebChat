@@ -44,8 +44,14 @@ const db = getFirestore(app);
 
 //? <!----------------------------------------------- < Set Users In database> ----------------------------------------------->
 
-async function InsertSignupData(data) {
-    set(ref(Database, "Users/" + data.name.trim()), data).then((res) => console.log("data inserted"))
+async function InsertSignupData(data, location) {
+    await set(ref(Database, "Users/" + data.name.trim()), data)
+        .then((res) => {
+            console.log("Data Inserted")
+            setTimeout(() => {
+                window.location.href = location
+            }, 1000);
+        })
         .catch((err) => console.log(err));
 }
 
@@ -60,10 +66,7 @@ const signInWithGoogle = () => {
             let email = res.user.email
             let image = res.user.photoURL
             console.log(name, email, image);
-            InsertSignupData({ name, email, image, age: null })
-            setTimeout(() => {
-                window.location.href = "chat.html"
-            }, 1000);
+            InsertSignupData({ name, email, image, age: 23, password: email }, "chat.html")
         })
         .catch((err) => console.log(err));
 }

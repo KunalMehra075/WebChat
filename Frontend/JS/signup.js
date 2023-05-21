@@ -11,13 +11,14 @@ signupform?.addEventListener("submit", (e) => {
     };
 
     console.log(creds);
-    InsertSignupData(creds);
+
 
     createUserWithEmailAndPassword(auth, creds.email, creds.password)
-        .then((creds) => {
-            const user = creds.user;
+        .then((Data) => {
+            const user = Data.user;
             console.log(user);
             swal("Registration successfully!!", "", "success");
+            InsertSignupData(creds, "index.html");
         })
         .catch((error) => {
             const errorMessage = error.message;
