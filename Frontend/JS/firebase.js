@@ -7,7 +7,7 @@ import {
 import {
     getFirestore,
     collection,
-    getDocs, setDoc, doc
+    getDocs, setDoc, doc, updateDoc
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import {
     getAuth,
@@ -77,6 +77,6 @@ export {
     createUserWithEmailAndPassword,
     auth, signOut, get, remove, update, ref,
     signInWithEmailAndPassword,
-    signInWithGoogle,
+    signInWithGoogle, updateDoc, doc,
     onAuthStateChanged, Database, db, getDocs, collection
 }

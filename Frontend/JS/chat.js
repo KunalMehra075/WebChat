@@ -1,20 +1,33 @@
-import { auth, onAuthStateChanged, signOut, get, ref, Database, db, collection, getDocs } from "./firebase.js";
+import {
+    auth, onAuthStateChanged, signOut, doc,
+    db, collection, getDocs, updateDoc
+} from "./firebase.js";
 
 
 
 CheckUserSignedInOrNot()
 
 function CheckUserSignedInOrNot() {
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
+    onAuthStateChanged(auth, (userdata) => {
+        if (userdata) {
+            let UserEmail = userdata.email
+            let user = {}
+            GetAllUsers()
+            let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
+            for (let i = 0; i < AllUsers.length; i++) {
+                if (AllUsers[i].email == UserEmail) {
+                    user = AllUsers[i]
+                    break
+                }
+            }
+
             console.log(user);
             let ActiveUser = user.displayName || user.email.split("@")[0].replace(/[0-9]/g, '');
-            let UserEmail = user.email
-            let UserID = user.uid
+            let UserID = user.id
             let UserIMG = user.image || "Images/avatar.jpg"
             let friends = user.friends
             RenderUserDataOnPage(ActiveUser, UserEmail, UserID, UserIMG, friends)
-            GetAllUsers()
+
         } else {
             swal("No User Signed In", "Redirecting to Home Page", "info");
             setTimeout(() => {
@@ -29,6 +42,7 @@ function RenderUserDataOnPage(name, email, id, UserIMG, friends) {
     document.getElementById("NavUserName").innerHTML = name
     document.getElementById("NavUserEmail").innerHTML = email
     localStorage.setItem("UserID", id)
+    RenderContacts(friends)
     localStorage.setItem("UserFriends", JSON.stringify(friends))
 }
 
@@ -44,6 +58,7 @@ async function GetAllUsers() {
             localStorage.setItem("AllUsers", JSON.stringify(users))
             console.log(users);
             RenderUsersOnSearchBar(users)
+
         })
         .catch((err) => console.log(err));
 }
@@ -77,7 +92,6 @@ function RenderUsersOnSearchBar(users) {
             let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
             let newFriend;
             for (let i = 0; i < AllUsers.length; i++) {
-                console.log(AllUsers[i].id, target);
                 if (AllUsers[i].id == target) {
                     newFriend = AllUsers[i]
                     AddFriendFunction(newFriend);
@@ -90,7 +104,39 @@ function RenderUsersOnSearchBar(users) {
 
 }
 
+function RenderContacts(FriendsArray) {
+    let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
+    let Friends = []
 
+    for (let i = 0; i < AllUsers.length; i++) {
+        if (FriendsArray.includes(AllUsers[i].id)) {
+            Friends.push(AllUsers[i])
+        }
+    }
+    Friends = Friends.map(item => {
+        return `
+        <div data-friendId=${item.id} class="Contact">
+        <div>
+          <img class="contactImage" src=${item.image || "Images/chatlogo.png"} alt="" />
+        </div>
+        <div>
+          <p class="contactName">${item.name}</p>
+          <p class="contactEmail">${item.status || "Click on contact to start chat"}</p>
+        </div>
+      </div>
+        `
+
+    })
+    let ContactContainer = document.getElementById("ContactContainer")
+    ContactContainer.innerHTML = Friends.join("")
+
+    let Contacts = document.getElementsByClassName("Contact");
+    for (let i = 0; i < Contacts.length; i++) {
+        Contacts[i].addEventListener("click", (e) => {
+            console.log(e.target.dataset.friendId);;
+        })
+    }
+}
 
 //? <!----------------------------------------------- < Adding a Friend> ----------------------------------------------->
 
@@ -98,6 +144,7 @@ async function AddFriendFunction(newFriend) {
     let uid = localStorage.getItem("UserID")
     let rid = newFriend.id
     let payload = JSON.parse(localStorage.getItem("UserFriends"))
+
     if (payload.includes(rid)) {
         swal(`${newFriend.name} is already in your contacts`, "", "info")
         return
