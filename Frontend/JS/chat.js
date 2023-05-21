@@ -24,7 +24,7 @@ function CheckUserSignedInOrNot() {
 }
 
 function RenderUserDataOnPage(name, email, id, UserIMG) {
-    document.getElementById("mainphoto").setAttribute("src") = UserIMG
+    document.getElementById("NavUserImg").setAttribute("src") = UserIMG
     document.getElementById("NavUserName").innerHTML = name
     document.getElementById("NavUserEmail").innerHTML = email
     localStorage.setItem("UserID", id)
@@ -83,7 +83,7 @@ logout.addEventListener("click", () => {
     }).then((logout) => {
         if (logout) {
             signOut(auth).then(() => {
-                swal("Sign-out successful", "Redirecting to home Page", "success");
+                swal("Logout successful", "Redirecting to home Page", "success");
                 setTimeout(() => {
                     window.location.href = "index.html"
                 }, 3000);
