@@ -71,10 +71,13 @@ function RenderUsersOnSearchBar(users) {
     let AddFriends = document.getElementsByClassName("AddFriend");
     for (let i = 0; i < AddFriends.length; i++) {
         AddFriends[i].addEventListener("click", (e) => {
+
             let target = e.target.dataset.id
+            console.log(target);
             let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
             let newFriend;
             for (let i = 0; i < AllUsers.length; i++) {
+                console.log(AllUsers[i].id, target);
                 if (AllUsers[i].id == target) {
                     newFriend = AllUsers[i]
                     AddFriendFunction(newFriend);

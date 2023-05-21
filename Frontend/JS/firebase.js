@@ -46,7 +46,7 @@ const db = getFirestore(app);
 
 async function InsertSignupData(data, location) {
 
-    await setDoc(doc(db, "Users", data.name.trim()), data)
+    await setDoc(doc(db, "Users", data.name.replace(/[^a-zA-Z]/g, '')), data)
         .then((res) => {
             console.log("Data Inserted")
             setTimeout(() => {
