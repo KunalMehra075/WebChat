@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "./firebase";
+import { auth, signInWithEmailAndPassword } from "./firebase.js";
 
 let loginform = document.getElementById("loginform")
 loginform.addEventListener("submit", (e) => {
@@ -12,17 +12,23 @@ loginform.addEventListener("submit", (e) => {
     // ! LOGGING IN
     signInWithEmailAndPassword(auth, creds.email, creds.password)
         .then((creds) => {
-
+            console.log(creds);
             const user = creds.user;
-            console.log(user);
             swal("Login Successful!", "Redirecting to Chat Page...", "success")
-            alert(user.email + " Login successfully!!!");
 
         })
         .catch((error) => {
             const errorMessage = error.message;
-            swal("Login Successful!", errorMessage, "error")
+            swal("User Not Found, Please Login!", errorMessage, "error")
             console.log(errorMessage);
 
         });
 });
+let GoogleSignup = document.getElementById("GoogleSignup")
+GoogleSignup.addEventListener("click", (e) => {
+    e.preventDefault()
+
+
+
+
+})

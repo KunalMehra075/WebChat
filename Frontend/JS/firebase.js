@@ -17,7 +17,7 @@ const Database = getDatabase()
 let auth = getAuth()
 
 async function InsertSignupData(data) {
-    set(ref(Database, "Users/" + data.email), data).then((res) => alert("data inserted"))
+    set(ref(Database, "Users/" + data.name.trim()), data).then((res) => console.log("data inserted"))
         .catch((err) => console.log(err));
 }
 
