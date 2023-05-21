@@ -23,9 +23,9 @@ function CheckUserSignedInOrNot() {
 }
 
 function RenderUserDataOnPage(name, email, id) {
-    NavUserName.innerHTML = name
-    NavUserEmail = email
-    localStorage.setItem("UserID", uid)
+    document.getElementById("NavUserName").innerHTML = name
+    document.getElementById("NavUserEmail").innerHTML = email
+    localStorage.setItem("UserID", id)
 }
 
 
@@ -53,7 +53,6 @@ SendMessageForm.addEventListener("submit", (e) => {
         text: msg.value
     }
     console.log(message);
-
 })
 
 
