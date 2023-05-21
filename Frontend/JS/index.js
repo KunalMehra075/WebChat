@@ -15,7 +15,9 @@ loginform.addEventListener("submit", (e) => {
             console.log(creds);
             const user = creds.user;
             swal("Login Successful!", "Redirecting to Chat Page...", "success")
-
+            setTimeout(() => {
+                window.location.href = "chat.html"
+            }, 1000);
         })
         .catch((error) => {
             const errorMessage = error.message;

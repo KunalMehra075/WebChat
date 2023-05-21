@@ -1,14 +1,26 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getDatabase, get, set, remove, update, ref } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+import {
+    getDatabase, get, set,
+    remove, update, ref
+} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+import {
+    getFirestore,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import {
     getAuth,
+    onAuthStateChanged,
     GoogleAuthProvider,
     signInWithPopup,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+
+//? <!----------------------------------------------- < Firebase Configuragtion> ----------------------------------------------->
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBWvrts_WXipbJTX6Af8gPbX7y0ZP8sQE",
@@ -19,35 +31,48 @@ const firebaseConfig = {
     messagingSenderId: "558453563785",
     appId: "1:558453563785:web:6d6810b730af4248424158"
 };
+
+
 const app = initializeApp(firebaseConfig);
-const Database = getDatabase()
 let auth = getAuth(app)
+
+
+const Database = getDatabase(app)
+const db = getFirestore(app);
+
+
+
+//? <!----------------------------------------------- < Set Users In database> ----------------------------------------------->
 
 async function InsertSignupData(data) {
     set(ref(Database, "Users/" + data.name.trim()), data).then((res) => console.log("data inserted"))
         .catch((err) => console.log(err));
 }
 
-const Provider = new GoogleAuthProvider()
 
+
+//? <!----------------------------------------------- < Signup With> ----------------------------------------------->
+const Provider = new GoogleAuthProvider()
 const signInWithGoogle = () => {
     signInWithPopup(auth, Provider)
         .then((res) => {
-            console.log(res)
-            let name = res.user.diplayName
+            let name = res.user.displayName
             let email = res.user.email
             let image = res.user.photoURL
             console.log(name, email, image);
             InsertSignupData({ name, email, image, age: null })
+            setTimeout(() => {
+                window.location.href = "chat.html"
+            }, 1000);
         })
         .catch((err) => console.log(err));
-
 }
 
 export {
     InsertSignupData,
     createUserWithEmailAndPassword,
-    auth, signOut, get,
+    auth, signOut, get, remove, update, ref,
     signInWithEmailAndPassword,
-    signInWithGoogle
+    signInWithGoogle,
+    onAuthStateChanged, Database, db, getDocs, collection
 }
