@@ -24,7 +24,7 @@ function CheckUserSignedInOrNot() {
 }
 
 function RenderUserDataOnPage(name, email, id, UserIMG) {
-    document.getElementById("NavUserImg").setAttribute("src") = UserIMG
+    document.getElementById("NavUserImg").setAttribute("src", UserIMG)
     document.getElementById("NavUserName").innerHTML = name
     document.getElementById("NavUserEmail").innerHTML = email
     localStorage.setItem("UserID", id)
