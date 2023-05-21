@@ -67,7 +67,7 @@ const signInWithGoogle = () => {
             let email = res.user.email
             let image = res.user.photoURL || "Images/chatlogo.png"
             console.log(name, email, image);
-            InsertSignupData({ name, email, image, age: 23, password: email }, "chat.html")
+            InsertSignupData({ name, email, image, age: 23, password: email, friends: [] }, "chat.html")
         })
         .catch((err) => console.log(err));
 }

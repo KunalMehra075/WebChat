@@ -83,24 +83,34 @@
               <div>
                 <img src="Images/chatlogo.png" alt="" />
                 <div style="line-height: 1.2">
-                  <h1>Kunal Mehra</h1>
-                  <label>online</label>
+                  <h1 id="FriendName"></h1>
+                  <label id="FriendStatus"></label>
                 </div>
               </div>
             </div>
             <div class="MessagesContainer">
-              <div class="MsgRight MsgInstance">
+              <div class="MsgCenter MsgInstance">
                 <div>
-                  <img class="ChatSmolImgs" src="Images/chatlogo.png" alt="" />
-                  <p>Message 1</p>
+                  <p>Please select a group or a chat</p>
                 </div>
               </div>
-              <div class="MsgLeft MsgInstance">
-                <div>
-                  <img class="ChatSmolImgs" src="Images/chatlogo.png" alt="" />
-                  <p>Hello I am Kunal Mehra ahahahahah</p>
+              <!--*------- <right left messages> ----------->
+
+              <!-- <div class="MsgRight MsgInstance">
+                  <div>
+                    <img class="ChatSmolImgs" src="Images/chatlogo.png" alt="" />
+                    <p>Message 1</p>
+                  </div>
                 </div>
-              </div>
+                <div class="MsgLeft MsgInstance">
+                  <div>
+                    <img class="ChatSmolImgs" src="Images/chatlogo.png" alt="" />
+                    <p>Hello I am Kunal Mehra ahahahahah</p>
+                  </div>
+                </div>
+            -->
+
+              <!--*------- <right left messages> ----------->
             </div>
             <div>
               <form id="SendMessageForm">
@@ -113,7 +123,7 @@
         <div id="SearchBox">
           <h1>Search for a Friend</h1>
           <input type="text" id="searchBar" placeholder="Enter Email" />
-          <div class="SearchCardContainer">
+          <div id="SearchCardContainer" class="SearchCardContainer">
             <div class="SearchCard">
               <div>
                 <img class="contactImage" src="Images/chatlogo.png" alt="" />
