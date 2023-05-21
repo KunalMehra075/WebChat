@@ -17,8 +17,8 @@
   width: 40%;
   padding: 40px 80px;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 .Introbox input {
   width: 100%;
@@ -34,13 +34,13 @@
   font-size: 18px;
   color: grey;
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 #GoogleSignup:hover {
   background-color: whitesmoke;
 }
-#SubmitButton {
+.SubmitButton {
   width: 100%;
   margin-top: 10px;
   background-color: #1c98f7;
@@ -53,6 +53,6 @@
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
-#SubmitButton:hover {
+.SubmitButton:hover {
   background-color: #1985d7;
 }

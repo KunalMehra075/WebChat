@@ -6,7 +6,18 @@ nav {
   align-items: center;
   padding: 10px 30px;
 }
-
+#logout {
+  background-color: #1c98f7;
+  border-radius: 25px;
+  padding: 7px 18px;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  border: none;
+}
+#logout:hover {
+  background-color: #0f65dd;
+}
 .MenuBox {
   display: flex;
   justify-content: center;
@@ -140,6 +151,10 @@ nav {
   border: 1px solid #1c98f7;
   border-radius: 5px;
 }
+.AddFriend:hover {
+  background-color: #0f65dd;
+}
+
 /*todo <!----------------------------------------------- < Chatbox > -----------------------------------------------> */
 
 #ChatBox {
@@ -194,6 +209,9 @@ nav {
   background-color: #1c98f7;
   color: white;
   border: none;
+}
+#SendMessageForm input[type="submit"]:hover {
+  background-color: #0f65dd;
 }
 .MsgInstance p {
   max-width: 350px;

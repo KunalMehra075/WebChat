@@ -33,3 +33,12 @@ a {
   font-size: 30px;
   margin-right: 5px;
 }
+
+.return-links {
+  display: block;
+  font-size: 18px;
+  color: blue;
+  width: 100%;
+  text-align: right;
+  text-decoration: underline !important;
+}
