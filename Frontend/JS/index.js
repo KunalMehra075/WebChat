@@ -22,7 +22,9 @@ loginform.addEventListener("submit", (e) => {
         .catch((error) => {
             const errorMessage = error.message;
             swal("User Not Found, Please Login!", errorMessage, "error")
-            console.log(errorMessage);
+            setInterval(() => {
+                window.location.href = "signup.html"
+            }, 2000);
 
         });
 });

@@ -11,7 +11,8 @@ function CheckUserSignedInOrNot() {
             let ActiveUser = user.displayName || user.email.split("@")[0].replace(/[0-9]/g, '');
             let UserEmail = user.email
             let UserID = user.uid
-            RenderUserDataOnPage(ActiveUser, UserEmail, UserID)
+            let UserIMG = user.image || "Images/avatar.jpg"
+            RenderUserDataOnPage(ActiveUser, UserEmail, UserID, UserIMG)
             GetAllUsers()
         } else {
             swal("No User Signed In", "Redirecting to Home Page", "info");
@@ -22,7 +23,8 @@ function CheckUserSignedInOrNot() {
     });
 }
 
-function RenderUserDataOnPage(name, email, id) {
+function RenderUserDataOnPage(name, email, id, UserIMG) {
+    document.getElementById("mainphoto").setAttribute("src") = UserIMG
     document.getElementById("NavUserName").innerHTML = name
     document.getElementById("NavUserEmail").innerHTML = email
     localStorage.setItem("UserID", id)

@@ -8,6 +8,7 @@ signupform?.addEventListener("submit", (e) => {
         name: signupform.name.value,
         age: signupform.age.value,
         password: signupform.password.value,
+        image: "Images/chatlogo.png",
     };
 
     console.log(creds);

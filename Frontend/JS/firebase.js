@@ -7,7 +7,7 @@ import {
 import {
     getFirestore,
     collection,
-    getDocs
+    getDocs, setDoc, doc
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import {
     getAuth,
@@ -45,7 +45,8 @@ const db = getFirestore(app);
 //? <!----------------------------------------------- < Set Users In database> ----------------------------------------------->
 
 async function InsertSignupData(data, location) {
-    await set(ref(Database, "Users/" + data.name.trim()), data)
+
+    await setDoc(doc(db, "Users", data.name.trim()), data)
         .then((res) => {
             console.log("Data Inserted")
             setTimeout(() => {
@@ -64,7 +65,7 @@ const signInWithGoogle = () => {
         .then((res) => {
             let name = res.user.displayName
             let email = res.user.email
-            let image = res.user.photoURL
+            let image = res.user.photoURL || "Images/chatlogo.png"
             console.log(name, email, image);
             InsertSignupData({ name, email, image, age: 23, password: email }, "chat.html")
         })
