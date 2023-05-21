@@ -1,7 +1,14 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getDatabase, get, set, remove, update, ref } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBWvrts_WXipbJTX6Af8gPbX7y0ZP8sQE",
@@ -14,11 +21,33 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const Database = getDatabase()
-let auth = getAuth()
+let auth = getAuth(app)
 
 async function InsertSignupData(data) {
     set(ref(Database, "Users/" + data.name.trim()), data).then((res) => console.log("data inserted"))
         .catch((err) => console.log(err));
 }
 
-export { InsertSignupData, createUserWithEmailAndPassword, auth, signInWithEmailAndPassword, signOut, get }
+const Provider = new GoogleAuthProvider()
+
+const signInWithGoogle = () => {
+    signInWithPopup(auth, Provider)
+        .then((res) => {
+            console.log(res)
+            let name = res.user.diplayName
+            let email = res.user.email
+            let image = res.user.photoURL
+            console.log(name, email, image);
+            InsertSignupData({ name, email, image, age: null })
+        })
+        .catch((err) => console.log(err));
+
+}
+
+export {
+    InsertSignupData,
+    createUserWithEmailAndPassword,
+    auth, signOut, get,
+    signInWithEmailAndPassword,
+    signInWithGoogle
+}

@@ -1,4 +1,4 @@
-import { auth, signInWithEmailAndPassword } from "./firebase.js";
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebase.js";
 
 let loginform = document.getElementById("loginform")
 loginform.addEventListener("submit", (e) => {
@@ -25,10 +25,4 @@ loginform.addEventListener("submit", (e) => {
         });
 });
 let GoogleSignup = document.getElementById("GoogleSignup")
-GoogleSignup.addEventListener("click", (e) => {
-    e.preventDefault()
-
-
-
-
-})
+GoogleSignup.addEventListener("click", signInWithGoogle)
