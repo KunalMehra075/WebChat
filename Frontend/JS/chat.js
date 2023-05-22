@@ -2,6 +2,7 @@ import {
     auth, onAuthStateChanged, signOut, doc,
     db, collection, getDocs, updateDoc
 } from "./firebase.js";
+import { CheckCurrFriend } from "./messaging.js";
 
 
 let FriendName = document.getElementById("FriendName")
@@ -34,6 +35,8 @@ function CheckUserSignedInOrNot() {
             let UserID = user.id
             let UserIMG = user.image || "Images/avatar.jpg"
             let friends = user.friends
+            let CurrentUser = { ActiveUser, UserEmail, UserID, UserIMG, friends }
+            localStorage.setItem("CurrentUser", JSON.stringify(CurrentUser))
             RenderUserDataOnPage(ActiveUser, UserEmail, UserID, UserIMG, friends)
         } else {
             swal("No User Signed In", "Redirecting to Home Page", "info");
@@ -71,7 +74,12 @@ async function GetAllUsers() {
 }
 
 function RenderUsersOnSearchBar(users) {
+
+
+    let uid = localStorage.getItem("UserID")
+    let friends = JSON.parse(localStorage.getItem("CurrentUser")).friends
     let Users = users.map(item => {
+        if (item.id == uid || friends.includes(item.id)) return ""
         return `
         <div class="SearchCard">
         <div>
@@ -95,13 +103,14 @@ function RenderUsersOnSearchBar(users) {
         AddFriends[i].addEventListener("click", (e) => {
 
             let target = e.target.dataset.id
-            console.log(target);
+
             let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
             let newFriend;
             for (let i = 0; i < AllUsers.length; i++) {
                 if (AllUsers[i].id == target) {
                     newFriend = AllUsers[i]
                     AddFriendFunction(newFriend);
+
                     break;
                 }
             }
@@ -163,7 +172,7 @@ function PutFriendOrGroupActive(id) {
 function RenderActiceChat(data) {
     FriendName.innerHTML = data.name
     FriendStatus.innerHTML = "online"
-    document.getElementById("msgSend").setAttribute("disabled", "false")
+    CheckCurrFriend()
 }
 
 

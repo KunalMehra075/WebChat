@@ -1,16 +1,21 @@
 import { auth, doc, db, setDoc, addDoc, collection, query, where, getDocs } from "./firebase.js";
 
 
-// let CurrentFriend = localStorage.getItem("ActiveFriend")
-// if (CurrentFriend) {
-//     FriendName.innerHTML = JSON.parse(CurrentFriend).name || ""
-//     FriendStatus.innerHTML = CurrentFriend ? "online" : "last seen recently"
+CheckCurrFriend()
 
-
-//     const parentDocRef = doc(db, "Messages", "one2one");
-//     const subcollectionRef = collection(parentDocRef, CurrentFriend.senderID + message.recieverID);
-
-// }
+function CheckCurrFriend() {
+    let CurrentFriend = localStorage.getItem("ActiveFriend")
+    if (CurrentFriend) {
+        FriendName.innerHTML = JSON.parse(CurrentFriend).name || ""
+        FriendStatus.innerHTML = CurrentFriend ? "online" : "last seen recently"
+        const collectionRef = collection(db, 'Messages');
+        CurrentFriend = JSON.parse(CurrentFriend);
+        let rid = CurrentFriend.id
+        let sid = localStorage.getItem("UserID")
+        console.log(rid, sid);
+        GetAllMessages(collectionRef, sid, rid)
+    }
+}
 
 
 let SendMessageForm = document.getElementById("SendMessageForm")
@@ -34,27 +39,15 @@ SendMessageForm.addEventListener("submit", (e) => {
 })
 
 async function InsertMessageToDB(message) {
-
-    // let randomid = message.senderID + message.recieverID + Math.floor(Math.random() * 100000000000)
     const collectionRef = collection(db, 'Messages');
-    // const subcollectionRef = collection(parentDocRef, message.senderID + message.recieverID);
-
     await addDoc(collectionRef, message)
         .then((docRef) => {
-            console.log("Message Sent")
+            console.log("Message Sent from", message.senderID, "to", message.recieverID)
             GetAllMessages(collectionRef, message.senderID, message.recieverID)
         })
         .catch((error) => {
             console.error('Error adding document:', error);
         });
-
-
-    // await setDoc(doc(db, "Messages", randomid), message)
-    //     .then((res) => {
-    //         console.log("Message Sent")
-    //         GetAllMessages("Messages", message.senderID, message.recieverID)
-    //     })
-    //     .catch((err) => console.log(err));
 }
 async function GetAllMessages(Collection, sid, rid) {
 
@@ -88,7 +81,7 @@ async function GetAllMessages(Collection, sid, rid) {
             console.log('Error getting documents:', error);
         });
 
-
+    console.log(AllMsgs);
     RenderMessages(AllMsgs)
 
 }
@@ -96,7 +89,7 @@ async function GetAllMessages(Collection, sid, rid) {
 
 function RenderMessages(Messages) {
     let uid = localStorage.getItem("UserID")
-    Messages.sort((a, b) => b.Time.split(",")[1] - a.Time.split(",")[1])
+    Messages.sort((a, b) => a.Time.replace(/[^0-9]/g, '') - b.Time.replace(/[^0-9]/g, ''))
     Messages = Messages.map(item => {
         let firstUser = item.senderID == uid
         return `
@@ -118,3 +111,6 @@ function RenderMessages(Messages) {
 
 
 }
+
+
+export { CheckCurrFriend }
