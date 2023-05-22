@@ -22,7 +22,9 @@ function CheckCurrFriend() {
 
         onSnapshot(collectionRef, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
-                GetAllMessages(collectionRef, sid, rid)
+                if (change.type === 'added' || change.type === 'modified' || change.type === 'removed') {
+                    GetAllMessages(collectionRef, sid, rid)
+                }
             });
         });
     }
@@ -51,8 +53,6 @@ SendMessageForm.addEventListener("submit", (e) => {
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const dateTime = `${day}/${month}/${year}T${hours}:${minutes}:${seconds}`;
 
-    console.log(dateTime);
-    console.log(new Date().toISOString());
     let message = {
         senderID: localStorage.getItem("UserID"),
         recieverID: JSON.parse(SecondPerson).id,
@@ -114,7 +114,19 @@ async function GetAllMessages(Collection, sid, rid) {
 
 
 function RenderMessages(Messages) {
-    console.log(Messages);
+    // console.log(Messages);
+    let MessagesContainer = document.getElementById("MessagesContainer")
+    if (Messages.length == 0) {
+        MessagesContainer.innerHTML = `
+        <div class="MsgCenter MsgInstance">
+        <div>
+          <p style="width:100%">No Messages Yet</p>
+        </div>
+      </div>
+        `
+        return
+    }
+
     let uid = localStorage.getItem("UserID")
     Messages.sort((a, b) => a.Time.replace(/[^0-9]/g, '') - b.Time.replace(/[^0-9]/g, '')).slice(0, 20)
     Messages.sort((a, b) => a.Time - b.Time).slice(0, 20)
@@ -134,10 +146,14 @@ function RenderMessages(Messages) {
         `
     })
 
-    let MessagesContainer = document.getElementById("MessagesContainer")
+
     MessagesContainer.innerHTML = Messages.join("")
     MessagesContainer.scrollTop = MessagesContainer.scrollHeight;
 }
 
 
 export { CheckCurrFriend }
+
+
+
+

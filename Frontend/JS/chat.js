@@ -6,6 +6,7 @@ import { CheckCurrFriend } from "./messaging.js";
 
 let spinner = document.getElementById("spinner")
 let FriendName = document.getElementById("FriendName")
+let FriendImage = document.getElementById("FriendImage")
 let FriendStatus = document.getElementById("FriendStatus")
 
 CheckUserSignedInOrNot()
@@ -169,6 +170,7 @@ function PutFriendOrGroupActive(id) {
 function RenderActiveChat(data) {
     FriendName.innerHTML = data.name
     FriendStatus.innerHTML = "online"
+    FriendImage.setAttribute("src", data.image)
     CheckCurrFriend()
 }
 //? <!----------------------------------------------- < Adding a Friend> ----------------------------------------------->

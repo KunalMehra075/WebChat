@@ -27,7 +27,7 @@
   }
   .Contact > div:nth-child(2),
   .SearchCard > div:nth-child(2) {
-    width: 56%;
+    width: 80%;
   }
   .MenuBox {
     margin: 0;

@@ -1,9 +1,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import {
-    getDatabase, get, set,
-    remove, update, ref
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
 import {
     getFirestore,
     collection, query, where, addDoc,
@@ -35,9 +32,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 let auth = getAuth(app)
-
-
-const Database = getDatabase(app)
 const db = getFirestore(app);
 
 
@@ -68,15 +62,20 @@ const signInWithGoogle = () => {
             console.log(name, email, image);
             InsertSignupData({ name, email, image, age: 23, password: email, friends: [] }, "chat.html")
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            // "warning","success","error","info"
+            swal("500 Server Error, ", err.message + "\n" + "Please try logging in with Email & Password", "error");
+
+            console.log(err)
+        });
 }
 
 export {
     InsertSignupData,
     createUserWithEmailAndPassword,
-    auth, signOut, get, remove, update, ref,
+    auth, signOut,
     signInWithEmailAndPassword, collection,
     signInWithGoogle, updateDoc, doc, setDoc,
-    onAuthStateChanged, Database, db, getDocs,
+    onAuthStateChanged, db, getDocs,
     query, where, addDoc, onSnapshot
 }
