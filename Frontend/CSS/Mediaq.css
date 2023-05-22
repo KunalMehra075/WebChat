@@ -1,0 +1,103 @@
+/*todo ----------------------------Medium Screen Sizes -------------------------------- */
+@media all and (min-width: 810px) and (max-width: 1079px) {
+  body {
+    overflow-x: hidden;
+  }
+  #SearchBox {
+    display: none !important;
+  }
+  .Introbox {
+    width: 70%;
+  }
+  #SearchBox {
+    display: none;
+  }
+  #ContactsBox {
+    width: 40%;
+  }
+  #ChatBox {
+    width: 60%;
+  }
+  .Contact {
+    justify-content: space-around;
+  }
+  .Contact > div:nth-child(1),
+  .SearchCard > div:nth-child(1) {
+    width: 33%;
+  }
+  .Contact > div:nth-child(2),
+  .SearchCard > div:nth-child(2) {
+    width: 56%;
+  }
+  .MenuBox {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    place-items: center;
+  }
+  .MenuBox > div {
+    margin: 3px;
+  }
+  .mainphoto {
+    width: 50px;
+  }
+  #NavUserEmail {
+    font-size: 14px;
+  }
+  #SendMessageForm input {
+    width: 77%;
+  }
+}
+
+/*todo ----------------------------Small Screen Sizes -------------------------------- */
+@media all and (min-width: 320px) and (max-width: 809px) {
+  body {
+    overflow-x: hidden;
+  }
+  #SearchBox {
+    display: none !important;
+  }
+  .Introbox {
+    width: 100%;
+  }
+  #SearchBox {
+    display: none;
+  }
+  #ContactsBox {
+    width: 40%;
+  }
+  #ChatBox {
+    width: 60%;
+  }
+  .Contact {
+    justify-content: space-around;
+  }
+  .Contact > div:nth-child(1),
+  .SearchCard > div:nth-child(1) {
+    width: 33%;
+  }
+  .Contact > div:nth-child(2),
+  .SearchCard > div:nth-child(2) {
+    width: 56%;
+  }
+  .MenuBox {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    place-items: center;
+  }
+  .MenuBox > div {
+    margin: 3px;
+  }
+  .mainphoto {
+    width: 50px;
+  }
+  #NavUserEmail {
+    font-size: 14px;
+  }
+  #SendMessageForm input {
+    width: 77%;
+  }
+}
