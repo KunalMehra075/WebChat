@@ -1,4 +1,4 @@
-import { auth, doc, db, setDoc, addDoc, collection, query, where, getDocs } from "./firebase.js";
+import { auth, doc, db, setDoc, addDoc, collection, query, where, getDocs, onSnapshot } from "./firebase.js";
 
 
 let spinner = document.getElementById("spinner")
@@ -9,16 +9,22 @@ function CheckCurrFriend() {
     spinner.style.display = "block"//!SPINNER
     let CurrentFriend = localStorage.getItem("ActiveFriend")
     if (CurrentFriend) {
-        FriendName.innerHTML = JSON.parse(CurrentFriend).name || ""
-        FriendStatus.innerHTML = CurrentFriend ? "online" : "last seen recently"
-        const collectionRef = collection(db, 'Messages');
         CurrentFriend = JSON.parse(CurrentFriend);
+
         let rid = CurrentFriend.id
         let sid = localStorage.getItem("UserID")
-        console.log(rid, sid);
-        setInterval(() => {
-            GetAllMessages(collectionRef, sid, rid)
-        }, 1000);
+        const collectionRef = collection(db, 'Messages');
+
+        GetAllMessages(collectionRef, sid, rid)
+
+        FriendName.innerHTML = CurrentFriend.name || ""
+        FriendStatus.innerHTML = CurrentFriend ? "online" : "last seen recently"
+
+        onSnapshot(collectionRef, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                GetAllMessages(collectionRef, sid, rid)
+            });
+        });
     }
     spinner.style.display = "none"//!SPINNER
 }
@@ -27,20 +33,35 @@ function CheckCurrFriend() {
 let SendMessageForm = document.getElementById("SendMessageForm")
 let msg = document.getElementById("msgInp")
 SendMessageForm.addEventListener("submit", (e) => {
+    spinner.style.display = "block"//!SPINNER
+
     let SecondPerson = localStorage.getItem("ActiveFriend")
     if (!SecondPerson) {
         swal("Please Select a chat before messaging", "", "info");
         return
     }
     e.preventDefault()
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const dateTime = `${day}/${month}/${year}T${hours}:${minutes}:${seconds}`;
+
+    console.log(dateTime);
+    console.log(new Date().toISOString());
     let message = {
         senderID: localStorage.getItem("UserID"),
         recieverID: JSON.parse(SecondPerson).id,
         text: msg.value,
-        Time: new Date().toLocaleString(),
+        Time: dateTime,
     }
     // console.log(message);
     InsertMessageToDB(message)
+    spinner.style.display = "none"//!SPINNER
     msg.value = ""
 })
 
@@ -55,6 +76,7 @@ async function InsertMessageToDB(message) {
             console.error('Error adding document:', error);
         });
 }
+
 async function GetAllMessages(Collection, sid, rid) {
 
 
@@ -86,16 +108,16 @@ async function GetAllMessages(Collection, sid, rid) {
         .catch((error) => {
             console.log('Error getting documents:', error);
         });
-
-    console.log(AllMsgs);
     RenderMessages(AllMsgs)
-
 }
 
 
+
 function RenderMessages(Messages) {
+    console.log(Messages);
     let uid = localStorage.getItem("UserID")
-    Messages.sort((a, b) => a.Time.replace(/[^0-9]/g, '') - b.Time.replace(/[^0-9]/g, ''))
+    Messages.sort((a, b) => a.Time.replace(/[^0-9]/g, '') - b.Time.replace(/[^0-9]/g, '')).slice(0, 20)
+    Messages.sort((a, b) => a.Time - b.Time).slice(0, 20)
     Messages = Messages.map(item => {
         let firstUser = item.senderID == uid
         return `
@@ -103,7 +125,8 @@ function RenderMessages(Messages) {
         <div>
           <img class="ChatSmolImgs" src="${firstUser ? "Images/chatlogo.png" : "Images/chatlogo.png"}" alt="" />
           <p style="position:relative;">${item.text} 
-          <label class="showtime">${item.Time.split(",")[1]}</label>
+
+           <label class="showtime">${item.Time.split("T")[1]}</label>
           </p>
          
         </div>

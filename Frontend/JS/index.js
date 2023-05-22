@@ -21,10 +21,7 @@ loginform.addEventListener("submit", (e) => {
         })
         .catch((error) => {
             const errorMessage = error.message;
-            swal("User Not Found, Please Login!", errorMessage, "error")
-            setInterval(() => {
-                window.location.href = "signup.html"
-            }, 2000);
+            swal("User Not Found!", errorMessage, "error")
 
         });
 });

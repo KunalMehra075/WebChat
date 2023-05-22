@@ -5,7 +5,6 @@ import {
 import { CheckCurrFriend } from "./messaging.js";
 
 let spinner = document.getElementById("spinner")
-
 let FriendName = document.getElementById("FriendName")
 let FriendStatus = document.getElementById("FriendStatus")
 
@@ -15,27 +14,28 @@ function CheckUserSignedInOrNot() {
     spinner.style.display = "block"//!SPINNER
     onAuthStateChanged(auth, (userdata) => {
         if (userdata) {
+            GetAllUsers()
+            let AllUsers = JSON.parse(localStorage.getItem("AllUsers")) || []
             let UserEmail = userdata.email
             let user = {}
-            GetAllUsers()
-            let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
             for (let i = 0; i < AllUsers.length; i++) {
                 if (AllUsers[i].email == UserEmail) {
                     user = AllUsers[i]
                     break
                 }
             }
-
             console.log(user);
-            let ActiveUser = user.displayName || user.email.split("@")[0].replace(/[0-9]/g, '');
+
+            let ActiveUser = user.displayName || user?.email?.split("@")[0].replace(/[0-9]/g, '');
             let UserID = user.id
             let UserIMG = user.image || "Images/avatar.jpg"
             let friends = user.friends
             let CurrentUser = { ActiveUser, UserEmail, UserID, UserIMG, friends }
-            CheckCurrFriend()
+
             localStorage.setItem("CurrentUser", JSON.stringify(CurrentUser))
             RenderUserDataOnPage(ActiveUser, UserEmail, UserID, UserIMG, friends)
             spinner.style.display = "none"//!SPINNER
+
         } else {
             spinner.style.display = "none"//!SPINNER
             swal("No User Signed In", "Redirecting to Home Page", "info");
@@ -57,7 +57,7 @@ function RenderUserDataOnPage(name, email, id, UserIMG, friends) {
 
 async function GetAllUsers() {
     let userCol = collection(db, "Users")
-    getDocs(userCol)
+    await getDocs(userCol)
         .then((snap) => {
             let users = []
             snap.docs.forEach(doc => {
@@ -151,7 +151,6 @@ function RenderContacts(FriendsArray) {
         })
     }
 }
-
 //? <!----------------------------------------------- < Put Friend Or Group Active> ----------------------------------------------->
 
 function PutFriendOrGroupActive(id) {
@@ -225,6 +224,7 @@ logout.addEventListener("click", () => {
         if (logout) {
             signOut(auth).then(() => {
                 swal("Logout successful", "Redirecting to home Page", "success");
+                localStorage.clear()
                 setTimeout(() => {
                     window.location.href = "index.html"
                 }, 3000);

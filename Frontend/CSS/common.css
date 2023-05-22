@@ -61,11 +61,11 @@ a {
 }
 #spinner {
   z-index: 5;
-  display: none;
+  /* display: block !important; */
   position: absolute;
-  width: 150px;
+  width: 55px;
   border: none;
-  left: 50%;
-  top: 50%;
+  right: 10px;
+  top: 40%;
   transform: translateX(-50%) translateY(-50%);
 }
