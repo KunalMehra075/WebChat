@@ -6,7 +6,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
 import {
     getFirestore,
-    collection,
+    collection, query, where, addDoc,
     getDocs, setDoc, doc, updateDoc
 } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 import {
@@ -45,7 +45,6 @@ const db = getFirestore(app);
 //? <!----------------------------------------------- < Set Users In database> ----------------------------------------------->
 
 async function InsertSignupData(data, location) {
-
     await setDoc(doc(db, "Users", data.name.replace(/[^a-zA-Z]/g, '')), data)
         .then((res) => {
             console.log("Data Inserted")
@@ -76,7 +75,8 @@ export {
     InsertSignupData,
     createUserWithEmailAndPassword,
     auth, signOut, get, remove, update, ref,
-    signInWithEmailAndPassword,
-    signInWithGoogle, updateDoc, doc,
-    onAuthStateChanged, Database, db, getDocs, collection
+    signInWithEmailAndPassword, collection,
+    signInWithGoogle, updateDoc, doc, setDoc,
+    onAuthStateChanged, Database, db, getDocs,
+    query, where, addDoc
 }

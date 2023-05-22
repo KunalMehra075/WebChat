@@ -4,6 +4,14 @@ import {
 } from "./firebase.js";
 
 
+let FriendName = document.getElementById("FriendName")
+let FriendStatus = document.getElementById("FriendStatus")
+
+let CurrentFriend = localStorage.getItem("ActiveFriend")
+if (CurrentFriend) {
+    FriendName.innerHTML = JSON.parse(CurrentFriend).name || ""
+    FriendStatus.innerHTML = CurrentFriend ? "online" : "last seen recently"
+}
 
 CheckUserSignedInOrNot()
 
@@ -27,7 +35,6 @@ function CheckUserSignedInOrNot() {
             let UserIMG = user.image || "Images/avatar.jpg"
             let friends = user.friends
             RenderUserDataOnPage(ActiveUser, UserEmail, UserID, UserIMG, friends)
-
         } else {
             swal("No User Signed In", "Redirecting to Home Page", "info");
             setTimeout(() => {
@@ -115,13 +122,13 @@ function RenderContacts(FriendsArray) {
     }
     Friends = Friends.map(item => {
         return `
-        <div data-friendId=${item.id} class="Contact">
-        <div>
-          <img class="contactImage" src=${item.image || "Images/chatlogo.png"} alt="" />
+        <div data-id=${item.id} class="Contact">
+        <div data-id=${item.id}>
+          <img data-id=${item.id} class="contactImage" src=${item.image || "Images/chatlogo.png"} alt="" />
         </div>
-        <div>
-          <p class="contactName">${item.name}</p>
-          <p class="contactEmail">${item.status || "Click on contact to start chat"}</p>
+        <div data-friendId=${item.id}>
+          <p data-id=${item.id} class="contactName">${item.name}</p>
+          <p data-id=${item.id} class="contactEmail">${item.status || "Click on contact to start chat"}</p>
         </div>
       </div>
         `
@@ -133,10 +140,34 @@ function RenderContacts(FriendsArray) {
     let Contacts = document.getElementsByClassName("Contact");
     for (let i = 0; i < Contacts.length; i++) {
         Contacts[i].addEventListener("click", (e) => {
-            console.log(e.target.dataset.friendId);;
+            PutFriendOrGroupActive(e.target.dataset.id);;
         })
     }
 }
+
+//? <!----------------------------------------------- < Put Friend Or Group Active> ----------------------------------------------->
+
+function PutFriendOrGroupActive(id) {
+    let AllUsers = JSON.parse(localStorage.getItem("AllUsers"))
+    let ActiveFriend = {}
+    for (let i = 0; i < AllUsers.length; i++) {
+        if (AllUsers[i].id == id) {
+            ActiveFriend = AllUsers[i]
+            localStorage.setItem("ActiveFriend", JSON.stringify(AllUsers[i]))
+            RenderActiceChat(ActiveFriend)
+            break;
+        }
+    }
+}
+
+function RenderActiceChat(data) {
+    FriendName.innerHTML = data.name
+    FriendStatus.innerHTML = "online"
+    document.getElementById("msgSend").setAttribute("disabled", "false")
+}
+
+
+
 
 //? <!----------------------------------------------- < Adding a Friend> ----------------------------------------------->
 
@@ -163,17 +194,6 @@ async function AddFriendFunction(newFriend) {
 
 
 
-let SendMessageForm = document.getElementById("SendMessageForm")
-let msg = document.getElementById("msgInp")
-SendMessageForm.addEventListener("submit", (e) => {
-    e.preventDefault()
-    let message = {
-        senderID: localStorage.getItem("UserID"),
-        recieverID: localStorage.getItem("FriendID"),
-        text: msg.value
-    }
-    console.log(message);
-})
 
 
 

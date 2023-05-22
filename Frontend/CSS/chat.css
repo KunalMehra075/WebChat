@@ -93,10 +93,13 @@ nav {
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 .SearchCardContainer {
+  overflow-y: scroll;
   width: 100%;
+  min-height: 70vh;
 }
 /*todo <!----------------------------------------------- < Contacts > -----------------------------------------------> */
 .ContactContainer {
+  overflow-y: scroll;
   width: 100%;
   min-height: 75vh;
   padding: 7px;
@@ -232,7 +235,7 @@ nav {
 }
 .MsgInstance > div {
   display: flex;
-  margin: 4px 0;
+  margin: 15px 0;
   align-items: center;
 }
 .MsgLeft > div {
@@ -248,7 +251,7 @@ nav {
   align-items: center;
 }
 .MsgCenter > div {
-  justify-content: center;
+  text-align: center;
   background-color: rgba(206, 196, 196, 0.425);
   border-radius: 10px;
   width: 50%;
@@ -257,4 +260,13 @@ nav {
   width: 40px;
   margin: 0px 4px;
   border-radius: 50%;
+}
+.showtime {
+  font-size: 10px;
+  position: absolute;
+  top: 100%;
+  color: black;
+  width: 100%;
+  right: 0px;
+  text-align: center;
 }
