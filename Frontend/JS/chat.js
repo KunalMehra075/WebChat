@@ -4,19 +4,15 @@ import {
 } from "./firebase.js";
 import { CheckCurrFriend } from "./messaging.js";
 
+let spinner = document.getElementById("spinner")
 
 let FriendName = document.getElementById("FriendName")
 let FriendStatus = document.getElementById("FriendStatus")
 
-let CurrentFriend = localStorage.getItem("ActiveFriend")
-if (CurrentFriend) {
-    FriendName.innerHTML = JSON.parse(CurrentFriend).name || ""
-    FriendStatus.innerHTML = CurrentFriend ? "online" : "last seen recently"
-}
-
 CheckUserSignedInOrNot()
 
 function CheckUserSignedInOrNot() {
+    spinner.style.display = "block"//!SPINNER
     onAuthStateChanged(auth, (userdata) => {
         if (userdata) {
             let UserEmail = userdata.email
@@ -36,9 +32,12 @@ function CheckUserSignedInOrNot() {
             let UserIMG = user.image || "Images/avatar.jpg"
             let friends = user.friends
             let CurrentUser = { ActiveUser, UserEmail, UserID, UserIMG, friends }
+            CheckCurrFriend()
             localStorage.setItem("CurrentUser", JSON.stringify(CurrentUser))
             RenderUserDataOnPage(ActiveUser, UserEmail, UserID, UserIMG, friends)
+            spinner.style.display = "none"//!SPINNER
         } else {
+            spinner.style.display = "none"//!SPINNER
             swal("No User Signed In", "Redirecting to Home Page", "info");
             setTimeout(() => {
                 window.location.href = "index.html"
@@ -55,7 +54,6 @@ function RenderUserDataOnPage(name, email, id, UserIMG, friends) {
     RenderContacts(friends)
     localStorage.setItem("UserFriends", JSON.stringify(friends))
 }
-
 
 async function GetAllUsers() {
     let userCol = collection(db, "Users")
@@ -163,21 +161,17 @@ function PutFriendOrGroupActive(id) {
         if (AllUsers[i].id == id) {
             ActiveFriend = AllUsers[i]
             localStorage.setItem("ActiveFriend", JSON.stringify(AllUsers[i]))
-            RenderActiceChat(ActiveFriend)
+            RenderActiveChat(ActiveFriend)
             break;
         }
     }
 }
 
-function RenderActiceChat(data) {
+function RenderActiveChat(data) {
     FriendName.innerHTML = data.name
     FriendStatus.innerHTML = "online"
     CheckCurrFriend()
 }
-
-
-
-
 //? <!----------------------------------------------- < Adding a Friend> ----------------------------------------------->
 
 async function AddFriendFunction(newFriend) {

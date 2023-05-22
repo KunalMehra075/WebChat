@@ -43,10 +43,11 @@ a {
   text-decoration: underline !important;
 }
 .swal-button {
-  background-color: #0069ff !important;
+  background-color: #1d57f8 !important;
+  color: white !important;
 }
 .swal-button:hover {
-  background-color: #1d79bb !important;
+  background-color: #0095ff !important;
 }
 .swal-modal * {
   filter: saturate(1) !important;
@@ -57,4 +58,14 @@ a {
 }
 .swal-button {
   border-radius: 2px !important;
+}
+#spinner {
+  z-index: 5;
+  display: none;
+  position: absolute;
+  width: 150px;
+  border: none;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }

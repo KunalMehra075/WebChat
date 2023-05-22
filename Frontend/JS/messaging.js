@@ -1,9 +1,12 @@
 import { auth, doc, db, setDoc, addDoc, collection, query, where, getDocs } from "./firebase.js";
 
 
+let spinner = document.getElementById("spinner")
+
 CheckCurrFriend()
 
 function CheckCurrFriend() {
+    spinner.style.display = "block"//!SPINNER
     let CurrentFriend = localStorage.getItem("ActiveFriend")
     if (CurrentFriend) {
         FriendName.innerHTML = JSON.parse(CurrentFriend).name || ""
@@ -13,8 +16,11 @@ function CheckCurrFriend() {
         let rid = CurrentFriend.id
         let sid = localStorage.getItem("UserID")
         console.log(rid, sid);
-        GetAllMessages(collectionRef, sid, rid)
+        setInterval(() => {
+            GetAllMessages(collectionRef, sid, rid)
+        }, 1000);
     }
+    spinner.style.display = "none"//!SPINNER
 }
 
 
@@ -108,8 +114,6 @@ function RenderMessages(Messages) {
     let MessagesContainer = document.getElementById("MessagesContainer")
     MessagesContainer.innerHTML = Messages.join("")
     MessagesContainer.scrollTop = MessagesContainer.scrollHeight;
-
-
 }
 
 
