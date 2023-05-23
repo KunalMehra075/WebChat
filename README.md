@@ -2,7 +2,8 @@
 
 - Link of Website: https://web-chat-2047.vercel.app/
 - Presentation Video: https://youtu.be/AP1cvM9BR1o
-- 
+
+
 ![webchat](https://github.com/KunalMehra075/WebChat/assets/112753481/c6303690-020c-4993-9350-886bddf50737)
 
 # Introduction : What is Webchat ?
@@ -14,8 +15,7 @@
 
 ### User Authentication:
 
--Users can create accounts, log in, and securely authenticate themselves using Firebase Authentication.
-
+- Users can create accounts, log in, and securely authenticate themselves using Firebase Authentication.
 - This ensures that only authorized users can access the chat application.
 - Google Authentication using firebase
 
